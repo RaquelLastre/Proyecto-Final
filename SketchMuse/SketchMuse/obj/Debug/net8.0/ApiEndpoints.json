@@ -1,0 +1,23 @@
+[
+  {
+    "ContainingType": "SketchMuse.Controllers.ImagenesController",
+    "Method": "Search",
+    "RelativePath": "api/imagenes/search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "count",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
