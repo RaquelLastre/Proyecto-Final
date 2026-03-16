@@ -1,0 +1,10 @@
+<div class="grid">
+
+ @for (img of imagenes; track img.url) {
+  <div>
+    <img [src]="img.url">
+    <p>{{ img.titulo }}</p>
+  </div>
+}
+
+</div>

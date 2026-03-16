@@ -6,6 +6,7 @@ namespace SketchMuse.Infrastructure.ExternalApis
     public class BingImageService
     {
         private readonly HttpClient _httpClient;
+        //para acceder valoresde la config como appsettings.json
         private readonly IConfiguration _config;
 
         public BingImageService(HttpClient httpClient, IConfiguration config)
@@ -14,9 +15,11 @@ namespace SketchMuse.Infrastructure.ExternalApis
             _config = config;
         }
 
+        //async Task indica que es asincrono y el hilo no se queda bloqueado si la respuesta tarda unos segundos, puede seguir procesando peticiones
         public async Task<List<ImagenDTO>> LlamadaApiBing(string textoBusqueda, int numImagenes)
         {
             var apiKey = _config["BingApi:ApiKey"];
+            //convierte caracteres como espacios en algo que la url interprete correctamente
             string busquedaSinEspacios = Uri.EscapeDataString(textoBusqueda);
             var url = $"https://serpapi.com/search?engine=bing_images&q={busquedaSinEspacios}&count={numImagenes}&api_key={apiKey}";
 
@@ -35,16 +38,19 @@ namespace SketchMuse.Infrastructure.ExternalApis
             }
 
             var imagenes = new List<ImagenDTO>();
-
             foreach (var img in listaImagenes.EnumerateArray())
             {
-                imagenes.Add(new ImagenDTO
+                //intenta obtener la propiedad link del elemento json : img, si hay es true y pone el valor en url, si no, devuelve false
+                if(img.TryGetProperty("link", out JsonElement enlace))
                 {
-                    Url = img.GetProperty("link").GetString(),
-                    Titulo = img.TryGetProperty("title", out JsonElement titleEl)? titleEl.GetString(): ""
-                });
+                    imagenes.Add(new ImagenDTO
+                    {
+                        //url es un elemento json, asi que se convierte a string. Si por alguna razon no devuelve un string, no lanza excepción
+                        Url = enlace.GetString() ?? "",
+                        Titulo = img.TryGetProperty("title", out JsonElement titulo) ? titulo.GetString() : ""
+                    });
+                }
             }
-
             return imagenes;
         }
     }

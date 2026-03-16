@@ -2,7 +2,7 @@
   {
     "ContainingType": "SketchMuse.Controllers.ImagenesController",
     "Method": "Search",
-    "RelativePath": "api/imagenes/search",
+    "RelativePath": "api/imagenes",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

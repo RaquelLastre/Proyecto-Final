@@ -11,9 +11,23 @@ namespace SketchMuse.Controllers
         public ImagenesController(IImagenesService imageService) {
             _imageService = imageService; 
         }
-        [HttpGet("search")] public async Task<IActionResult> Search(string query, int count = 10) {
-            var images = await _imageService.PedirImagenes(query, count);
-            return Ok(images); 
+
+        [HttpGet]
+        public async Task<IActionResult> Search([FromQuery] string query, [FromQuery] int count = 10) {
+            try
+            {
+                var images = await _imageService.PedirImagenes(query, count);
+                return Ok(images);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+                return StatusCode(503, new
+                {
+                    mensaje = "Tenemos problemas técnicos que ya se están resolviendo",
+                    detalles = ex.Message
+                });
+            }
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿namespace SketchMuse.Infrastructure.ExternalApis
+﻿using SketchMuse.Domain.DTOs;
+using System.Text.Json;
+
+namespace SketchMuse.Infrastructure.ExternalApis
 {
     public class UnsplashService
     {
@@ -15,7 +18,7 @@
         {
             var apiKey = _config["UnsplashApi:ApiKey"];
             string busquedaSinEspacios = Uri.EscapeDataString(textoBusqueda);
-            var url = $"https://api.unsplash.com/search/photos?query={busqueda}&per_page={numImagenes}&client_id={apiKey}";
+            var url = $"https://api.unsplash.com/search/photos?query={busquedaSinEspacios}&per_page={numImagenes}&client_id={apiKey}";
 
             var response = await _httpClient.GetAsync(url);
             //comprueba que la respuesta sea 200-299 y si no lo es lanza una excepción
@@ -25,7 +28,7 @@
 
             var document = JsonDocument.Parse(json);
 
-            if (!document.RootElement.TryGetProperty("images_results", out JsonElement listaImagenes))
+            if (!document.RootElement.TryGetProperty("results", out JsonElement listaImagenes))
             {
                 Console.WriteLine("No se encontraron resultados: " + json);
                 return new List<ImagenDTO>();
@@ -35,11 +38,15 @@
 
             foreach (var img in listaImagenes.EnumerateArray())
             {
-                imagenes.Add(new ImagenDTO
+               if (img.GetProperty("urls").TryGetProperty("raw", out JsonElement enlace))
                 {
-                    Url = img.GetProperty("urls").GetProperty("raw").GetString(),
-                    Titulo = img.TryGetProperty("alt_description", out JsonElement titleEl) ? titleEl.GetString(): ""
-                });
+                    imagenes.Add(new ImagenDTO
+                    {
+                        //url es un elemento json, asi que se convierte a string. Si por alguna razon no devuelve un string, no lanza excepción
+                        Url = enlace.GetString() ?? "",
+                        Titulo = img.TryGetProperty("alt_description", out JsonElement titulo) ? titulo.GetString() : ""
+                    });
+                }
             }
 
             return imagenes;
