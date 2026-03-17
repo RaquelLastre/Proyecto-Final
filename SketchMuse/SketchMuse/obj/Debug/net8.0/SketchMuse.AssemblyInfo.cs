@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SketchMuse")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ceef70b2422ac129e9f067e54310e993ebcaae5e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+538aa88901ee392a1bfa46267a074a8bab57abfc")]
 [assembly: System.Reflection.AssemblyProductAttribute("SketchMuse")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SketchMuse")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

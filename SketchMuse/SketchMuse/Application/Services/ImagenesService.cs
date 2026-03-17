@@ -7,10 +7,10 @@ namespace SketchMuse.Application.Interfaces
 {
     public class ImagenesService: IImagenesService
     {
-        private readonly BingImageService _bingImageService;
+        private readonly PixabayService _pixabyService;
         private readonly UnsplashService _unsplashservice;
-        public ImagenesService(BingImageService bingService, UnsplashService unsplashService) {
-            _bingImageService = bingService; 
+        public ImagenesService(PixabayService pixabayService, UnsplashService unsplashService) {
+            _pixabyService = pixabayService; 
             _unsplashservice = unsplashService;
         }
 
@@ -23,7 +23,7 @@ namespace SketchMuse.Application.Interfaces
              }
              catch
              {
-                 imagenes = await _bingImageService.LlamadaApiBing(query, count);
+                 imagenes = await _pixabyService.LlamadaApiPixabay(query, count);
              }
             var resultado = imagenes.Select(i => new ImagenDTO{
                 Titulo = i.Titulo,

@@ -3,25 +3,25 @@ using System.Text.Json;
 
 namespace SketchMuse.Infrastructure.ExternalApis
 {
-    public class BingImageService
+    public class PixabayService
     {
         private readonly HttpClient _httpClient;
         //para acceder valoresde la config como appsettings.json
         private readonly IConfiguration _config;
 
-        public BingImageService(HttpClient httpClient, IConfiguration config)
+        public PixabayService(HttpClient httpClient, IConfiguration config)
         {
             _httpClient = httpClient;
             _config = config;
         }
 
         //async Task indica que es asincrono y el hilo no se queda bloqueado si la respuesta tarda unos segundos, puede seguir procesando peticiones
-        public async Task<List<ImagenDTO>> LlamadaApiBing(string textoBusqueda, int numImagenes)
+        public async Task<List<ImagenDTO>> LlamadaApiPixabay(string textoBusqueda, int numImagenes)
         {
-            var apiKey = _config["BingApi:ApiKey"];
+            var apiKey = _config["PixabayApi:ApiKey"];
             //convierte caracteres como espacios en algo que la url interprete correctamente
             string busquedaSinEspacios = Uri.EscapeDataString(textoBusqueda);
-            var url = $"https://serpapi.com/search?engine=bing_images&q={busquedaSinEspacios}&count={numImagenes}&api_key={apiKey}";
+            var url = $"https://pixabay.com/api/?key={apiKey}&q={busquedaSinEspacios}&per_page={numImagenes}";
 
             var response = await _httpClient.GetAsync(url);
             //comprueba que la respuesta sea 200-299 y si no lo es lanza una excepción
@@ -31,7 +31,7 @@ namespace SketchMuse.Infrastructure.ExternalApis
 
             var document = JsonDocument.Parse(json);
 
-            if (!document.RootElement.TryGetProperty("images_results", out JsonElement listaImagenes))
+            if (!document.RootElement.TryGetProperty("hits", out JsonElement listaImagenes))
             {
                 Console.WriteLine("No se encontraron resultados: " + json);
                 return new List<ImagenDTO>();
@@ -41,13 +41,13 @@ namespace SketchMuse.Infrastructure.ExternalApis
             foreach (var img in listaImagenes.EnumerateArray())
             {
                 //intenta obtener la propiedad link del elemento json : img, si hay es true y pone el valor en url, si no, devuelve false
-                if(img.TryGetProperty("link", out JsonElement enlace))
+                if(img.TryGetProperty("webformatURL", out JsonElement enlace))
                 {
                     imagenes.Add(new ImagenDTO
                     {
                         //url es un elemento json, asi que se convierte a string. Si por alguna razon no devuelve un string, no lanza excepción
                         Url = enlace.GetString() ?? "",
-                        Titulo = img.TryGetProperty("title", out JsonElement titulo) ? titulo.GetString() : ""
+                        Titulo = img.TryGetProperty("tags", out JsonElement titulo) ? titulo.GetString() : ""
                     });
                 }
             }

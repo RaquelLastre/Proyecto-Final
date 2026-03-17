@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { Imagen } from '../../models/imagen.model';
 import { Imagenes } from '../../../../core/services/imagenes';
 import { Buscador } from "../../components/buscador/buscador";
@@ -13,14 +13,19 @@ import { ListaImagenes } from "../../components/lista-imagenes/lista-imagenes";
 export class Main {
    imagenes: Imagen[] = []
 
-  constructor(private imagenesService: Imagenes){}
+  constructor(private imagenesService: Imagenes, private cdr: ChangeDetectorRef){}
 
   buscar(query: string){
-
     this.imagenesService
       .buscarImagenes(query,10)
-      .subscribe(data => {
-        this.imagenes = data
+      .subscribe({
+        next: data => {
+          this.imagenes = data;
+          this.cdr.detectChanges();
+        },
+        error: err => {
+          console.error('Error en la búsqueda:', err);
+        }
       })
   }
 }
