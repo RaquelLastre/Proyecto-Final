@@ -1,9 +1,5 @@
-<input
- type="text"
- [(ngModel)]="texto"
- placeholder="¿Qué quieres dibujar?"
-/>
+<div>
+    <input type="text" [(ngModel)]="texto" placeholder="¿Qué quieres dibujar?" (keyup.enter)="onBuscar()" />
 
-<button (click)="onBuscar()">
-Buscar
-</button>
+    <button (click)="onBuscar()">Buscar</button>
+</div>
