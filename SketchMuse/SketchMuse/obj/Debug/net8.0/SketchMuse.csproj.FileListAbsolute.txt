@@ -34,3 +34,15 @@ C:\Users\Raquel L A\Documents\GitHub\Proyecto-Final\SketchMuse\SketchMuse\obj\De
 C:\Users\Raquel L A\Documents\GitHub\Proyecto-Final\SketchMuse\SketchMuse\obj\Debug\net8.0\SketchMuse.pdb
 C:\Users\Raquel L A\Documents\GitHub\Proyecto-Final\SketchMuse\SketchMuse\obj\Debug\net8.0\SketchMuse.genruntimeconfig.cache
 C:\Users\Raquel L A\Documents\GitHub\Proyecto-Final\SketchMuse\SketchMuse\obj\Debug\net8.0\ref\SketchMuse.dll
+C:\Users\Mari PC\Desktop\RaquelJuegoBorrar\Proyecto-Final\SketchMuse\SketchMuse\obj\Debug\net8.0\SketchMuse.csproj.AssemblyReference.cache
+C:\Users\Mari PC\Desktop\RaquelJuegoBorrar\Proyecto-Final\SketchMuse\SketchMuse\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\Mari PC\Desktop\RaquelJuegoBorrar\Proyecto-Final\SketchMuse\SketchMuse\obj\Debug\net8.0\SketchMuse.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Mari PC\Desktop\RaquelJuegoBorrar\Proyecto-Final\SketchMuse\SketchMuse\obj\Debug\net8.0\SketchMuse.AssemblyInfoInputs.cache
+C:\Users\Mari PC\Desktop\RaquelJuegoBorrar\Proyecto-Final\SketchMuse\SketchMuse\obj\Debug\net8.0\SketchMuse.AssemblyInfo.cs
+C:\Users\Mari PC\Desktop\RaquelJuegoBorrar\Proyecto-Final\SketchMuse\SketchMuse\obj\Debug\net8.0\SketchMuse.csproj.CoreCompileInputs.cache
+C:\Users\Mari PC\Desktop\RaquelJuegoBorrar\Proyecto-Final\SketchMuse\SketchMuse\obj\Debug\net8.0\SketchMuse.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Mari PC\Desktop\RaquelJuegoBorrar\Proyecto-Final\SketchMuse\SketchMuse\obj\Debug\net8.0\SketchMuse.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Mari PC\Desktop\RaquelJuegoBorrar\Proyecto-Final\SketchMuse\SketchMuse\obj\Debug\net8.0\SketchMuse.sourcelink.json
+C:\Users\Mari PC\Desktop\RaquelJuegoBorrar\Proyecto-Final\SketchMuse\SketchMuse\obj\Debug\net8.0\SketchMuse.dll
+C:\Users\Mari PC\Desktop\RaquelJuegoBorrar\Proyecto-Final\SketchMuse\SketchMuse\obj\Debug\net8.0\refint\SketchMuse.dll
+C:\Users\Mari PC\Desktop\RaquelJuegoBorrar\Proyecto-Final\SketchMuse\SketchMuse\obj\Debug\net8.0\SketchMuse.pdb

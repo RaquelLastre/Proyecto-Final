@@ -1,6 +1,8 @@
 ﻿namespace SketchMuse.Application.Interfaces
 {
-    public class IUsuarioService
+    public interface IUsuarioService
     {
+        Task<User?> Registro(string email, string password);
+        Task<User?> Login(string email, string password);
     }
 }
