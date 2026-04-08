@@ -1,5 +1,10 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using SketchMuse.Application.Interfaces;
+using SketchMuse.Infrastructure.Data;
 using SketchMuse.Infrastructure.ExternalApis;
+using System;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,11 +24,12 @@ builder.Services.AddCors(options =>
     );
 });
 // Configura el DbContext para usar MySQL
-builder.Services.AddDbContext<AppDbContext>(options =>
+builder.Services.AddDbContext<MiDbcontext>(options =>
     options.UseMySql(
         builder.Configuration.GetConnectionString("DefaultConnection"),
         ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))
     ));
+
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
     {
@@ -46,6 +52,13 @@ builder.Services.AddSwaggerGen();
 
 
 var app = builder.Build();
+
+//Para que si no existe la bd se cree automaticamente, si hay migraciones pendientes las aplica
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<MiDbcontext>();
+    db.Database.Migrate();
+}
 
 app.UseAuthentication();
 app.UseAuthorization();

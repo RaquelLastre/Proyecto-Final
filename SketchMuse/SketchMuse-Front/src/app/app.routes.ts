@@ -2,6 +2,8 @@ import { Routes } from '@angular/router';
 import { Main } from './features/imagenes/pages/main/main';
 import { Perfil } from './features/imagenes/pages/perfil/perfil';
 import { Referencias } from './features/imagenes/pages/referencias/referencias';
+import { Login } from './features/imagenes/pages/login/login';
+import { Register } from './features/imagenes/pages/register/register';
 
 export const routes: Routes = [
      {
@@ -14,5 +16,8 @@ export const routes: Routes = [
   },{
     path: 'references',
     component: Referencias
-  }
+  },{
+    path: 'login',
+    component: Login
+  },{ path: 'register', component: Register },
 ];

@@ -2,5 +2,6 @@
 {
     public class HistorialDeBusquedas
     {
+        // a lo mejor no hace falta???
     }
 }

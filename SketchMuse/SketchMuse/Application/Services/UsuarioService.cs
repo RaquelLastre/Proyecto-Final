@@ -8,12 +8,12 @@ namespace SketchMuse.Application.Interfaces
     {
         private readonly MiDbcontext _context;
 
-        public UserService(MiDbcontext context)
+        public UsuarioService(MiDbcontext context)
         {
             _context = context;
         }
 
-        public async Task<User?> Registro(string email, string password)
+        public async Task<Usuario?> Registro(string email, string password)
         {
             // Comprobar si el email ya existe
             if (await _context.Usuarios.AnyAsync(u => u.Email == email))
@@ -24,7 +24,7 @@ namespace SketchMuse.Application.Interfaces
             var usuario = new Usuario
             {
                 Email = email,
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword(password) // Hash de la contraseña
+                Password = BCrypt.Net.BCrypt.HashPassword(password) // Hash de la contraseña
             };
 
             _context.Usuarios.Add(usuario);
@@ -32,7 +32,7 @@ namespace SketchMuse.Application.Interfaces
             return usuario;
         }
 
-        public async Task<User?> Login(string email, string password)
+        public async Task<Usuario?> Login(string email, string password)
         {
             var user = await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == email);
             if (user == null)
@@ -40,7 +40,7 @@ namespace SketchMuse.Application.Interfaces
                 return null;
             }
 
-            bool passwordCorrecta = BCrypt.Net.BCrypt.Verify(password, user.PasswordHash);
+            bool passwordCorrecta = BCrypt.Net.BCrypt.Verify(password, user.Password);
             if (!passwordCorrecta)
             {
                 return null;

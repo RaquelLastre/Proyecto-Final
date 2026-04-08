@@ -7,9 +7,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class Imagenes {
-   private apiUrl = 'https://localhost:7128/api/imagenes/'
+  private apiUrl = 'https://localhost:7128/api/imagenes/'
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   buscarImagenes(query: string, count: number): Observable<Imagen[]> {
     return this.http.get<Imagen[]>(`${this.apiUrl}?query=${query}&count=${count}`)
