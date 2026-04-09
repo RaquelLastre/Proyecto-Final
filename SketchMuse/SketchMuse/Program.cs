@@ -5,6 +5,7 @@ using SketchMuse.Infrastructure.Data;
 using SketchMuse.Infrastructure.ExternalApis;
 using System;
 using System.Text;
+using static SketchMuse.Application.Interfaces.IAlbumesService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,7 @@ builder.Services.AddSingleton<JwtService>();
 //Scoped define cuanto vive el objeto (transient: nuevo cada vez, scoped: nuevo en cada peticion HTTP, singleton: unico), es el que se suele usar en APIs
 builder.Services.AddScoped<IImagenesService, ImagenesService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<IAlbumService, AlbumesService>();
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>

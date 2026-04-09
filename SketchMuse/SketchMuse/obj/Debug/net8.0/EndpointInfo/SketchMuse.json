@@ -14,17 +14,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DatosUsuarioDTO"
+                "$ref": "#/components/schemas/UsuarioDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/DatosUsuarioDTO"
+                "$ref": "#/components/schemas/UsuarioDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/DatosUsuarioDTO"
+                "$ref": "#/components/schemas/UsuarioDTO"
               }
             }
           }
@@ -45,17 +45,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DatosUsuarioDTO"
+                "$ref": "#/components/schemas/UsuarioDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/DatosUsuarioDTO"
+                "$ref": "#/components/schemas/UsuarioDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/DatosUsuarioDTO"
+                "$ref": "#/components/schemas/UsuarioDTO"
               }
             }
           }
@@ -100,7 +100,7 @@
   },
   "components": {
     "schemas": {
-      "DatosUsuarioDTO": {
+      "UsuarioDTO": {
         "type": "object",
         "properties": {
           "email": {

@@ -4,20 +4,28 @@ import { Perfil } from './features/imagenes/pages/perfil/perfil';
 import { Referencias } from './features/imagenes/pages/referencias/referencias';
 import { Login } from './features/imagenes/pages/login/login';
 import { Register } from './features/imagenes/pages/register/register';
+import { authGuard } from './core/guards/auth-guard';
 
 export const routes: Routes = [
-     {
+  {
     path: '',
     component: Main
   },
   {
     path: 'me',
-    component: Perfil
-  },{
+    component: Perfil,
+    canActivate: [authGuard]
+  },
+  {
     path: 'references',
     component: Referencias
-  },{
+  },
+  {
     path: 'login',
     component: Login
-  },{ path: 'register', component: Register },
+  },
+  {
+    path: 'register',
+    component: Register
+  },
 ];

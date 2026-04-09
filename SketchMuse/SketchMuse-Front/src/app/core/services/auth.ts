@@ -9,7 +9,7 @@ export class Auth {
 
   private apiUrl = 'https://localhost:7128/api/auth';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   login(email: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, {
@@ -18,6 +18,9 @@ export class Auth {
     });
   }
   register(email: string, password: string) {
-  return this.http.post(this.apiUrl + '/register', { email, password });
-}
+    return this.http.post(this.apiUrl + '/register', { email, password });
+  }
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('token');
+  }
 }
