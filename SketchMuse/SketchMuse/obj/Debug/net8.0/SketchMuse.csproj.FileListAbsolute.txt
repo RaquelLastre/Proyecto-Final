@@ -228,7 +228,7 @@ C:\Users\Mari PC\Desktop\RaquelJuegoBorrar\Proyecto-Final\SketchMuse\SketchMuse\
 C:\Users\Mari PC\Desktop\RaquelJuegoBorrar\Proyecto-Final\SketchMuse\SketchMuse\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\Users\Mari PC\Desktop\RaquelJuegoBorrar\Proyecto-Final\SketchMuse\SketchMuse\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\Mari PC\Desktop\RaquelJuegoBorrar\Proyecto-Final\SketchMuse\SketchMuse\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\Users\Mari PC\Desktop\RaquelJuegoBorrar\Proyecto-Final\SketchMuse\SketchMuse\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\Mari PC\Desktop\RaquelJuegoBorrar\Proyecto-Final\SketchMuse\SketchMuse\obj\Debug\net8.0\SketchMuse.csproj.Up2Date
 C:\Users\Mari PC\Desktop\RaquelJuegoBorrar\Proyecto-Final\SketchMuse\SketchMuse\obj\Debug\net8.0\SketchMuse.genruntimeconfig.cache
 C:\Users\Mari PC\Desktop\RaquelJuegoBorrar\Proyecto-Final\SketchMuse\SketchMuse\obj\Debug\net8.0\ref\SketchMuse.dll
+C:\Users\Mari PC\Desktop\RaquelJuegoBorrar\Proyecto-Final\SketchMuse\SketchMuse\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

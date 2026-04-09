@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SketchMuse.Application.Interfaces;
 using System.Security.Claims;
 using static SketchMuse.Application.Interfaces.IAlbumesService;
@@ -10,9 +11,9 @@ namespace SketchMuse.Controllers
     public class ImagenesController : ControllerBase
     {
         private readonly IImagenesService _imageService;
-        private readonly IAlbumService _albumService;
+        private readonly IAlbumesService _albumService;
 
-        public ImagenesController(IImagenesService imageService, IAlbumService albumService)
+        public ImagenesController(IImagenesService imageService, IAlbumesService albumService)
         {
             _imageService = imageService;
             _albumService = albumService;
@@ -30,7 +31,7 @@ namespace SketchMuse.Controllers
                 if (userIdClaim != null)
                 {
                     int usuarioId = int.Parse(userIdClaim);
-                    await _albumService.GuardarAlbum(query, usuarioId, imagenes);
+                    await _albumService.CrearAlbum(query, usuarioId, imagenes);
                 }
 
                 return Ok(imagenes);
@@ -43,6 +44,17 @@ namespace SketchMuse.Controllers
                     detalles = ex.Message
                 });
             }
+        }
+
+        [HttpPost("{albumId}/agregar")]
+        [Authorize]
+        public async Task<IActionResult> AgregarAAlbum(int albumId)
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (userIdClaim == null) return Unauthorized();
+
+            await _albumService.AgregarAAlbum(albumId, int.Parse(userIdClaim));
+            return Ok();
         }
     }
 }

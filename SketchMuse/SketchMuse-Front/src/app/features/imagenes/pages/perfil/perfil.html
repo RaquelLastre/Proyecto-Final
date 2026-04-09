@@ -1,2 +1,9 @@
-<p>perfil works!</p>
-<app-album></app-album>
+<h1>Mis álbumes</h1>
+
+<div *ngIf="albumes.length === 0">
+    No tienes álbumes todavía
+</div>
+
+<div *ngFor="let album of albumes">
+    <app-album [album]="album"></app-album>
+</div>

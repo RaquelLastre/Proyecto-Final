@@ -2,11 +2,10 @@
 
 namespace SketchMuse.Application.Interfaces
 {
-    public class IAlbumesService
+    public interface IAlbumesService
     {
-        public interface IAlbumService
-        {
-            Task GuardarAlbum(string titulo, int usuarioId, List<ImagenDTO> imagenes);
-        }
+            Task CrearAlbum(string titulo, int usuarioId, List<ImagenDTO> imagenes);
+            Task AgregarAAlbum(int albumId, int usuarioId);
+            Task<List<AlbumDTO>> GetAlbumesUsuario(int usuarioId);
     }
 }

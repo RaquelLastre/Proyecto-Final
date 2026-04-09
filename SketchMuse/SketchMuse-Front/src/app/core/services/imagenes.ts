@@ -14,4 +14,11 @@ export class Imagenes {
   buscarImagenes(query: string, count: number): Observable<Imagen[]> {
     return this.http.get<Imagen[]>(`${this.apiUrl}?query=${query}&count=${count}`)
   }
+  
+  guardarAlbum(query: string, imagenes: Imagen[]) {
+  return this.http.post('https://localhost:7128/api/album', {
+    query: query,
+    imagenes: imagenes
+  });
+}
 }

@@ -5,7 +5,19 @@
     "version": "1.0"
   },
   "paths": {
-    "/api/Auth/register": {
+    "/api/albumes/user-albumes": {
+      "get": {
+        "tags": [
+          "Albumes"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/auth/register": {
       "post": {
         "tags": [
           "Auth"
@@ -36,7 +48,7 @@
         }
       }
     },
-    "/api/Auth/login": {
+    "/api/auth/login": {
       "post": {
         "tags": [
           "Auth"
@@ -87,6 +99,29 @@
               "type": "integer",
               "format": "int32",
               "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/imagenes/{albumId}/agregar": {
+      "post": {
+        "tags": [
+          "Imagenes"
+        ],
+        "parameters": [
+          {
+            "name": "albumId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],

@@ -1,4 +1,8 @@
-<div>
-    <h1>Titulo álbum</h1>
-    <p>24 Feb 2026</p>
+<div class="album">
+    <h2>{{ album.titulo }}</h2>
+    <p>{{ album.modifiedAt | date:'dd MMM yyyy' }}</p>
+
+    <div class="imagenes">
+        @for (img of album.previewImagenes; track img) {<img [src]="img" />}
+    </div>
 </div>

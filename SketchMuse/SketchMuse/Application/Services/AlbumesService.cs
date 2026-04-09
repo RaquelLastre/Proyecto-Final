@@ -1,20 +1,23 @@
-﻿using SketchMuse.Domain.DTOs;
+﻿using Microsoft.EntityFrameworkCore;
+using SketchMuse.Domain.DTOs;
 using SketchMuse.Domain.Entities;
 using SketchMuse.Infrastructure.Data;
 using static SketchMuse.Application.Interfaces.IAlbumesService;
 
 namespace SketchMuse.Application.Interfaces
 {
-    public class AlbumesService : IAlbumService
+    public class AlbumesService : IAlbumesService
     {
         private readonly MiDbcontext _context;
+        private readonly ImagenesService _imagenesService;
 
-        public AlbumesService(MiDbcontext context)
+        public AlbumesService(MiDbcontext context, ImagenesService imagenesService)
         {
             _context = context;
+            _imagenesService = imagenesService;
         }
 
-        public async Task GuardarAlbum(string titulo, int usuarioId, List<ImagenDTO> imagenes)
+        public async Task CrearAlbum(string titulo, int usuarioId, List<ImagenDTO> imagenes)
         {
             var album = new Album
             {
@@ -30,6 +33,51 @@ namespace SketchMuse.Application.Interfaces
 
             _context.Albumes.Add(album);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task AgregarAAlbum(int albumId, int usuarioId)
+        {
+            var album = await _context.Albumes
+                .Include(a => a.Imagenes)
+                .FirstOrDefaultAsync(a => a.Id == albumId && a.UsuarioId == usuarioId);
+
+            if (album == null) throw new Exception("Álbum no encontrado.");
+
+            var imagenesNuevas = await _imagenesService.PedirImagenes(album.Titulo, 10);
+
+            // HashSet de URLs existentes para filtrar duplicados
+            var urlsExistentes = album.Imagenes.Select(i => i.Url).ToHashSet();
+
+            album.Imagenes.AddRange(
+                imagenesNuevas
+                    .Where(i => !urlsExistentes.Contains(i.Url))
+                    .Select(i => new Imagen { Url = i.Url, Titulo = i.Titulo, AlbumId = album.Id })
+            );
+
+            album.UsedAt = DateTime.UtcNow;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<AlbumDTO>> GetAlbumesUsuario(int usuarioId)
+        {
+            var albumes = await _context.Albumes
+                .Include(a => a.Imagenes)
+                .Where(a => a.UsuarioId == usuarioId)
+                .ToListAsync();
+
+            return albumes
+                .OrderByDescending(a => a.UsedAt)
+                .Select(a => new AlbumDTO
+                {
+                    Id = a.Id,
+                    Titulo = a.Titulo,
+                    UsedAt = a.UsedAt,
+                    PreviewImagenes = a.Imagenes
+                        .Take(3)
+                        .Select(i => i.Url)
+                        .ToList()
+                })
+                .ToList();
         }
     }
 }

@@ -1,8 +1,18 @@
 [
   {
+    "ContainingType": "SketchMuse.Controllers.AlbumesController",
+    "Method": "GetMisAlbumes",
+    "RelativePath": "api/albumes/user-albumes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "SketchMuse.Controllers.AuthController",
     "Method": "Login",
-    "RelativePath": "api/Auth/login",
+    "RelativePath": "api/auth/login",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -18,7 +28,7 @@
   {
     "ContainingType": "SketchMuse.Controllers.AuthController",
     "Method": "Registrarse",
-    "RelativePath": "api/Auth/register",
+    "RelativePath": "api/auth/register",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -48,6 +58,22 @@
         "Name": "count",
         "Type": "System.Int32",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SketchMuse.Controllers.ImagenesController",
+    "Method": "AgregarAAlbum",
+    "RelativePath": "api/imagenes/{albumId}/agregar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "albumId",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

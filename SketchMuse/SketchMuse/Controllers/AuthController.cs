@@ -3,7 +3,7 @@ using SketchMuse.Application.Interfaces;
 namespace SketchMuse.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/auth")]
     public class AuthController : ControllerBase
     {
         private readonly IUsuarioService _usuarioService;

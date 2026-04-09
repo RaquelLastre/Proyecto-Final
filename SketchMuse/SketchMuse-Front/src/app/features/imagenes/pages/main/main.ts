@@ -23,19 +23,12 @@ export class Main {
   }
 
   buscar(query: string) {
-    this.imagenesService
-      .buscarImagenes(query, 10)
-      .subscribe({
-        next: data => {
-          this.imagenes = data;
-          if (this.authService.isLoggedIn()) {
-            // llamar al endpoint de guardar álbum
-          }
-          this.cdr.detectChanges();
-        },
-        error: err => {
-          console.error('Error en la búsqueda:', err);
-        }
-      })
+    this.imagenesService.buscarImagenes(query, 10).subscribe({
+      next: data => {
+        this.imagenes = data;
+        this.cdr.detectChanges();
+      },
+      error: err => console.error('Error en la búsqueda:', err)
+    });
   }
 }

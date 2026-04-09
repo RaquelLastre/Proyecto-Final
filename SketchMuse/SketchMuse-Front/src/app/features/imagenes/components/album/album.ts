@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import { CommonModule, DatePipe } from '@angular/common';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-album',
-  imports: [],
+  imports: [CommonModule, DatePipe],
   templateUrl: './album.html',
   styleUrl: './album.scss',
 })
-export class Album {}
+export class Album {
+  @Input() album: any;
+}
