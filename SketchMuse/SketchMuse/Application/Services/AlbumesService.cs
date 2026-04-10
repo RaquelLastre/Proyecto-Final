@@ -2,16 +2,15 @@
 using SketchMuse.Domain.DTOs;
 using SketchMuse.Domain.Entities;
 using SketchMuse.Infrastructure.Data;
-using static SketchMuse.Application.Interfaces.IAlbumesService;
 
 namespace SketchMuse.Application.Interfaces
 {
     public class AlbumesService : IAlbumesService
     {
         private readonly MiDbcontext _context;
-        private readonly ImagenesService _imagenesService;
+        private readonly IImagenesService _imagenesService;
 
-        public AlbumesService(MiDbcontext context, ImagenesService imagenesService)
+        public AlbumesService(MiDbcontext context, IImagenesService imagenesService)
         {
             _context = context;
             _imagenesService = imagenesService;
@@ -77,6 +76,18 @@ namespace SketchMuse.Application.Interfaces
                         .Select(i => i.Url)
                         .ToList()
                 })
+                .ToList();
+        }
+        public async Task<List<ImagenDTO>> GetImagenesAlbum(int albumId, int usuarioId)
+        {
+            var album = await _context.Albumes
+                .Include(a => a.Imagenes)
+                .FirstOrDefaultAsync(a => a.Id == albumId && a.UsuarioId == usuarioId);
+
+            if (album == null) throw new Exception("Álbum no encontrado.");
+
+            return album.Imagenes
+                .Select(i => new ImagenDTO { Url = i.Url, Titulo = i.Titulo })
                 .ToList();
         }
     }

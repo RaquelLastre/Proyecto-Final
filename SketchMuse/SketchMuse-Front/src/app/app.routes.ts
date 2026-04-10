@@ -21,11 +21,19 @@ export const routes: Routes = [
     component: Referencias
   },
   {
+    path: 'references/:query',
+    component: Referencias
+  },
+  {
     path: 'login',
     component: Login
   },
   {
     path: 'register',
     component: Register
-  },
+  }, {
+    path: 'album/:id',
+    component: Referencias,
+    canActivate: [authGuard]
+  }
 ];

@@ -7,5 +7,6 @@ namespace SketchMuse.Application.Interfaces
             Task CrearAlbum(string titulo, int usuarioId, List<ImagenDTO> imagenes);
             Task AgregarAAlbum(int albumId, int usuarioId);
             Task<List<AlbumDTO>> GetAlbumesUsuario(int usuarioId);
+            Task<List<ImagenDTO>> GetImagenesAlbum(int albumId, int usuarioId);
     }
 }

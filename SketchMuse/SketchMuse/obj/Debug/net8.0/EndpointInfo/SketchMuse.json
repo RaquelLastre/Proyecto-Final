@@ -17,6 +17,29 @@
         }
       }
     },
+    "/api/albumes/{albumId}/imagenes": {
+      "get": {
+        "tags": [
+          "Albumes"
+        ],
+        "parameters": [
+          {
+            "name": "albumId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/auth/register": {
       "post": {
         "tags": [

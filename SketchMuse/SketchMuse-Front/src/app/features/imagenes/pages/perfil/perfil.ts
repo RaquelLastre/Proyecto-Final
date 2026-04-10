@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AlbumService } from '../../../../core/services/album/album-service';
 import { Album } from "../../components/album/album";
 import { CommonModule } from '@angular/common';
@@ -12,20 +12,20 @@ import { Auth } from '../../../../core/services/auth';
   styleUrl: './perfil.scss',
 })
 export class Perfil implements OnInit {
-  
+
   albumes: any[] = [];
 
-  constructor(private albumService: AlbumService, private authService: Auth) {}
+  constructor(private albumService: AlbumService, private authService: Auth, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    console.log('Usuario logueado:', this.authService.isLoggedIn(), localStorage.getItem('token'));
-    
-
     this.albumService.getMisAlbumes().subscribe({
-      next: data => this.albumes = data,
+      next: data => {
+        this.albumes = data;
+        this.cdr.detectChanges();
+      },
       error: err => console.error(err)
     });
-    
-    console.log('Álbumes recibidos:', this.albumes);
+
+
   }
 }

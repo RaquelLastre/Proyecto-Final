@@ -13,7 +13,6 @@ namespace SketchMuse.Controllers
     public class AlbumesController:ControllerBase
     {
                 private readonly IAlbumesService _albumService;
-        private readonly MiDbcontext _context;
         public AlbumesController(IAlbumesService albumService)
         {
             _albumService = albumService;
@@ -23,22 +22,24 @@ namespace SketchMuse.Controllers
         [Authorize]
         public async Task<IActionResult> GetMisAlbumes()
         {
-            var albumesprueba = await _context.Albumes
-    .Include(a => a.Imagenes)
-    .Where(a => a.UsuarioId == 2)
-    .ToListAsync();
-
-            Console.WriteLine(albumesprueba.Count);
-
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (userIdClaim == null) return Unauthorized();
-            Console.WriteLine("UsuarioId del token: " + userIdClaim);
 
             int usuarioId = int.Parse(userIdClaim);
-
             var albumes = await _albumService.GetAlbumesUsuario(usuarioId);
-
             return Ok(albumes);
+        }
+
+        [HttpGet("{albumId}/imagenes")]
+        [Authorize]
+        public async Task<IActionResult> GetImagenesAlbum(int albumId)
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (userIdClaim == null) return Unauthorized();
+
+            int usuarioId = int.Parse(userIdClaim);
+            var imagenes = await _albumService.GetImagenesAlbum(albumId, usuarioId);
+            return Ok(imagenes);
         }
     }
 }

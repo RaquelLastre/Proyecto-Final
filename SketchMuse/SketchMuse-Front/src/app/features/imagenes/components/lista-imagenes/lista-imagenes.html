@@ -1,9 +1,9 @@
 <div class="grid">
 
- @for (img of imagenes; track $index) {
+  @for (img of imagenes; track $index) {
   <div>
-    <img [src]="img.url" height="200px">
+    <img [src]="img.url" height="200px" loading="lazy">
   </div>
-}
+  }
 
 </div>

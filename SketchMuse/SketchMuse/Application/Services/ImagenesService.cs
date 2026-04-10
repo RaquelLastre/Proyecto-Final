@@ -16,27 +16,27 @@ namespace SketchMuse.Application.Interfaces
 
         public async Task<List<ImagenDTO>> PedirImagenes(string query, int count)
         {
-            var imagenes = new List<ImagenDTO>();
-             try
-             {
-                 imagenes = await _unsplashservice.LlamadaApiUnsplash(query, count);
-             }
-             catch
-             {
-                 imagenes = await _pixabyService.LlamadaApiPixabay(query, count);
-             }
-            var resultado = imagenes.Select(i => new ImagenDTO{
+            List<ImagenDTO> imagenes;
+
+            try
+            {
+                imagenes = await _unsplashservice.LlamadaApiUnsplash(query, count);
+                if (imagenes == null || imagenes.Count == 0)
+                    throw new Exception("Unsplash sin resultados");
+            }
+            catch
+            {
+                imagenes = await _pixabyService.LlamadaApiPixabay(query, count);
+            }
+
+            if (imagenes == null || imagenes.Count == 0)
+                throw new Exception("No se pudieron obtener imágenes de ningún servicio externo.");
+
+            return imagenes.Select(i => new ImagenDTO
+            {
                 Titulo = i.Titulo,
                 Url = HttpUtility.UrlDecode(i.Url)
             }).ToList();
-
-
-            if (imagenes == null || imagenes.Count == 0)
-            {
-                throw new Exception("No se pudieron obtener imágenes de ningún servicio externo.");
-            }
-
-            return imagenes;
         }
     }
 }

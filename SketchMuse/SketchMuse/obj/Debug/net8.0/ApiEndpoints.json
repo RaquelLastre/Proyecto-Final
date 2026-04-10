@@ -1,6 +1,22 @@
 [
   {
     "ContainingType": "SketchMuse.Controllers.AlbumesController",
+    "Method": "GetImagenesAlbum",
+    "RelativePath": "api/albumes/{albumId}/imagenes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "albumId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SketchMuse.Controllers.AlbumesController",
     "Method": "GetMisAlbumes",
     "RelativePath": "api/albumes/user-albumes",
     "HttpMethod": "GET",
