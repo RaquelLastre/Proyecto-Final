@@ -4,6 +4,8 @@
 <p>No tienes álbumes todavía</p>
 }
 
-@for (album of albumes; track album.id) {
-<app-album [album]="album"></app-album>
-}
+<div class="albumes">
+    @for (album of albumes; track album.id) {
+    <app-album [album]="album"></app-album>
+    }
+</div>

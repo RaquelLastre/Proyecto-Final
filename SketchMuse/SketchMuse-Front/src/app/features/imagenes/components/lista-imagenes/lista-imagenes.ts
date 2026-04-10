@@ -8,6 +8,19 @@ import { Imagen } from '../../models/imagen.model';
   styleUrl: './lista-imagenes.scss',
 })
 export class ListaImagenes {
-  @Input()
-  imagenes: Imagen[] = []
+  @Input() imagenes: Imagen[] = [];
+
+  indiceActual = 0;
+
+  siguiente() {
+    if (this.indiceActual < this.imagenes.length - 1) {
+      this.indiceActual++;
+    }
+  }
+
+  anterior() {
+    if (this.indiceActual > 0) {
+      this.indiceActual--;
+    }
+  }
 }

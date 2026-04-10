@@ -1,12 +1,13 @@
 <header>
     <a routerLink="" class="logo">
-        <img src="aeherahjrjrt" alt="Logo" />
+        <img src="assets/LogoSM.jpg" alt="Logo" />
         <span>SketchMuse</span>
     </a>
 
     <nav>
         @if (isLoggedIn) {
         <button routerLink="/me">Mi perfil</button>
+        <button (click)="logout()">Logout</button>
         } @else {
         <button routerLink="/login">Login</button>
         <button routerLink="/register">Registro</button>

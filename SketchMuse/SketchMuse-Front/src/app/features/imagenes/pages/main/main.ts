@@ -1,15 +1,13 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { Imagen } from '../../models/imagen.model';
-import { Imagenes } from '../../../../core/services/imagenes';
 import { Buscador } from "../../components/buscador/buscador";
-import { ListaImagenes } from "../../components/lista-imagenes/lista-imagenes";
 import { Auth } from '../../../../core/services/auth';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink, RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-main',
-  imports: [Buscador, ListaImagenes, CommonModule, RouterModule],
+  imports: [Buscador, CommonModule, RouterModule],
   templateUrl: './main.html',
   styleUrl: './main.scss',
 })

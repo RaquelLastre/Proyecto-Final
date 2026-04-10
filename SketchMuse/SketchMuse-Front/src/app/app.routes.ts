@@ -5,6 +5,7 @@ import { Referencias } from './features/imagenes/pages/referencias/referencias';
 import { Login } from './features/imagenes/pages/login/login';
 import { Register } from './features/imagenes/pages/register/register';
 import { authGuard } from './core/guards/auth-guard';
+import { noAuthGuard } from './core/guards/no-auth-guard';
 
 export const routes: Routes = [
   {
@@ -26,11 +27,13 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    component: Login
+    component: Login,
+    canActivate: [noAuthGuard]
   },
   {
     path: 'register',
-    component: Register
+    component: Register,
+    canActivate: [noAuthGuard]
   }, {
     path: 'album/:id',
     component: Referencias,

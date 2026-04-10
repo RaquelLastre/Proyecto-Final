@@ -23,4 +23,8 @@ export class Auth {
   isLoggedIn(): boolean {
     return !!localStorage.getItem('token');
   }
+
+  logout() {
+    localStorage.removeItem('token');
+  }
 }
