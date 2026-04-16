@@ -5,9 +5,12 @@ using SketchMuse.Infrastructure.Data;
 using SketchMuse.Infrastructure.ExternalApis;
 using System.Text;
 
+//cargar las variables de .env
+DotNetEnv.Env.Load();
+
 var builder = WebApplication.CreateBuilder(args);
 
-//inserta en el constructor el HttpClient. IConfiguration ya está añadido entre otras cosas al poner la linea anterior
+//inserta en el constructor el HttpClient. IConfiguration ya estï¿½ aï¿½adido entre otras cosas al poner la linea anterior
 builder.Services.AddHttpClient<PixabayService>();
 builder.Services.AddHttpClient<UnsplashService>();
 builder.Services.AddSingleton<JwtService>();
